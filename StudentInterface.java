@@ -10,7 +10,7 @@ public interface StudentInterface {
 	/*可能存在重名，用列表输出*/
 	List<Student> deleteStudentByName(String name);//按姓名删除学生
 	
-	Student modifyStudentByName(String name);//按姓名修改信息
+	List<Student> modifyStudentByName(String name);//按姓名修改信息
 	//附加功能
 	Student findStudentBySid(int sid);//按学号查找学生
 	

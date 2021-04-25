@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.*;
 //接口的实现类
 public class StudentManager implements StudentInterface{
@@ -79,75 +78,62 @@ public class StudentManager implements StudentInterface{
 		}
 	}
 	//3.根据姓名删除学生信息
-	@Override
 	public List<Student> deleteStudentByName(String name) {
-		// 获取姓名删除
-		//Student student = students.remove(name);
+			List<Student> list = new ArrayList<Student>();
+			// 遍历所有的学生，然后和name逐个进行比较
+			Collection<Student> stus = students.values();
+			Iterator<Student> iterator = stus.iterator();
+			while(iterator.hasNext()){
+				Student student1 = iterator.next();
+				if(student1.getName().equals(name)){
+			    	 students.remove(student1);
+			       }
+			    }
+			return list.size() == 0?null:list;
+		}
+		public void deleteStudentByName() {
+			// 重载实现输入业务方法
+			String name = MyTools.getInputString("请输入要删除的学生的姓名：", scanner);
+			List<Student> stus = deleteStudentByName(name);
+			if(stus != null){
+				System.out.println("该姓名的学生不存在！");
+			}else{
+				System.out.println("删除成功！");
+			}
+		}
+
+	//4.根据姓名修改学生信息（已成功）
+	@Override
+	public List<Student> modifyStudentByName(String name) {
 		List<Student> list = new ArrayList<Student>();
 		// 遍历所有的学生，然后和name逐个进行比较
 		Collection<Student> stus = students.values();
 		Iterator<Student> iterator = stus.iterator();
 		while(iterator.hasNext()){
-			Student student = iterator.next();
-			if(student.getName().equals(name)){
-				list.add(student);
-			}
-		}
+			Student student1 = iterator.next();
+			if(student1.getName().equals(name)){
+		    	 //如果存在则输入要修改的信息
+					int sid = MyTools.getInputNumber("请输入新的学号：", scanner);
+					name = MyTools.getInputString("请输入新的姓名：", scanner);
+					int age = MyTools.getInputNumber("请输入新的年龄：", scanner);
+					Sex sex = MyTools.getInputString("请输入新的性别：", scanner).equals("男")?Sex.男:Sex.女;
+					//输入并获取保存
+					student1.setSid(sid);
+					student1.setName(name);
+					student1.setAge(age);
+					student1.setSex(sex);
+		       }
+		    }
 		return list.size() == 0?null:list;
-
-		//return student == null?false:true;
-	}
-	public void deleteStudentByName() {
-		// 实现输入业务方法
-		String name = MyTools.getInputString("请输入要删除的学生的姓名：", scanner);
-		//boolean bool = deleteStudentByName(name);
-		List<Student> stus = deleteStudentByName(name);
-		if(stus == null){
-			System.out.println("该姓名的学生不存在！");
-		}else{
-			for(int i = 0;i<stus.size();i++){
-			if (name.equals()){
-                 stus.remove(i);
-                 System.out.println("删除成功！");
-             }
-			System.out.println("删除学生成功！");
-		}
-		/*if(true){
-			System.out.println("删除学生成功！");
-		}else{
-			System.out.println("该学生不存在。");
-		}*/
-		
-	}
-	//4.根据姓名修改学生信息
-	
-	
-	@Override
-	public Student modifyStudentByName(String name) {
-		
-		Student student2 = students.get(name);
-		if(student2 !=null){
-			//如果不存在则输入要修改的信息
-			int sid = MyTools.getInputNumber("请输入新的学生的学号：", scanner);
-			name = MyTools.getInputString("请输入新的学生的姓名：", scanner);
-			int age = MyTools.getInputNumber("请输入新的学生的年龄：", scanner);
-			Sex sex = MyTools.getInputString("请输入新的学生的性别：", scanner).equals("男")?Sex.男:Sex.女;
-			//输入并获取保存
-			student2.setSid(sid);
-			student2.setName(name);
-			student2.setAge(age);
-			student2.setSex(sex);
-		}
-		return student2;
 	}
 	public void modifyStudentByName() {
 		// 重载实现输入业务方法
 		String name = MyTools.getInputString("请输入要修改的学生的姓名：", scanner);
-		Student stu = modifyStudentByName(name);
-		if(name.equals(stu)){
-			System.out.println("修改学生信息成功！");
+		List<Student> stus = modifyStudentByName(name);
+		if(stus == null){
+			System.out.println("修改成功！");
 		}else{
-			System.out.println("学生不存在。");
+			System.out.println("该姓名的学生不存在！");
 		}
 	}
 		
@@ -162,6 +148,7 @@ public class StudentManager implements StudentInterface{
 			Student student = students.get(sid);
 			System.out.println(student);
 		}
+		
 	}
 	
 	//附加功能已成功实现
@@ -182,6 +169,7 @@ public class StudentManager implements StudentInterface{
 		int sid = MyTools.getInputNumber("请输入要查找的学生的学号：", scanner);
 		return findStudentBySid(sid);
 	}
+	
 	//7.根据学号删除学生信息（成功）
 	@Override
 	public boolean deleteStudentBySid(int sid) {
@@ -205,7 +193,7 @@ public class StudentManager implements StudentInterface{
 		// 
 		Student student = students.get(sid);
 		if(student !=null){
-			//如果不存在则输入要修改的信息
+			//如果存在则输入要修改的信息
 			sid = MyTools.getInputNumber("请输入新的学生的学号：", scanner);
 			String name = MyTools.getInputString("请输入新的学生的姓名：", scanner);
 			int age = MyTools.getInputNumber("请输入新的学生的年龄：", scanner);

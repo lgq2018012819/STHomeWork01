@@ -49,13 +49,14 @@ public class Student {
 	
 	@Override
 	public String toString(){
-		return "学生{" +
+		return "{" +
 				"学号=" + sid +
 				",名字='" +name + '\'' +
 				",年龄="+ age +
 				",性别="+ sex +
 				'}';
 	}
+
 }
 
 enum Sex{
