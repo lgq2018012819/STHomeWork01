@@ -3,18 +3,21 @@ public class Student {
 	private int sid;
 	private String name;
 	private int age;
-	private Sex sex;//gender
+	//private Sex sex;
+	private Gender gender;//问题编码1，所有涉及代码均已更改
 	
 	public Student(){
+		
 	}
 	
-	public Student(int sid, String name, int age, Sex sex){
+	public Student(int sid, String name, int age, Gender gender){
 		this.sid = sid;
 		this.name = name;
 		this.age = age;
-		this.sex = sex;
+		this.gender = gender;
 	}
-	//get and set
+	
+
 	public int getSid() {
 		return sid;
 	}
@@ -39,26 +42,34 @@ public class Student {
 		this.age = age;
 	}
 
-	public Sex getSex() {
-		return sex;
+	public Gender getGender() {//问题编码1
+		return gender;
 	}
 
-	public void setSex(Sex sex) {
-		this.sex = sex;
+	public void setGender(Gender gender) {//问题编码1
+		this.gender = gender;
 	}
 	
 	@Override
 	public String toString(){
-		return "{" +
-				"学号=" + sid +
-				",名字='" +name + '\'' +
-				",年龄="+ age +
-				",性别="+ sex +
+		/**return "{" +
+				"学号="+sid+
+				",名字='"+name+'\''+
+				",年龄="+age+
+				",性别="+gender+
 				'}';
+		*问题编号14
+		**/
+		return "{" +
+		"学号=" + sid +
+		",名字='" + name + '\'' +
+		",年龄="+ age +
+		",性别="+ gender +
+		'}';
 	}
 
 }
 
-enum Sex{
+enum Gender{
 	男,女
 }

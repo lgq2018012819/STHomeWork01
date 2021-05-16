@@ -1,14 +1,18 @@
+
 import java.util.Scanner;
 
 public class StudentSystemApp {
 	public static void main(String[] args) {
 		// 写个变量调用StudentManager里的所有实现方法
 		StudentManager manager = new StudentManager();
+		
 		//执行在其Main方法中执行StudentManager的App方法
 		manager.welcome();
 		Scanner scanner = new Scanner(System.in);
+		
 		while(true){
-			manager.showMenu();
+			//问题编号5.
+			manager.showMenu();//显示操作菜单
 			int input = MyTools.getInputNumber("请选择您的操作：",scanner);
 			switch(input){
 				case 1:
